@@ -1,4 +1,4 @@
-package com.example.dell.sisekelo_mobile.model;
+package com.example.dell.sisekelo_mobile;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,7 +17,9 @@ import com.example.dell.sisekelo_mobile.R;
 
 public class Details extends AppCompatActivity {
 
-    TextView textView_title;
+    TextView textView_title, textView, textView1, textView2,textView3,textView4;
+
+    String category, depth, description,link,country,latitude,longitude,magnitude,date,title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,15 +32,35 @@ public class Details extends AppCompatActivity {
         final String data = intent.getStringExtra("info");
 
         String[] deepest_properties = data.trim().split("\n");
-
         for(int i = 0 ; i < deepest_properties.length ; i++){
 
             Log.d( "deep", ""+deepest_properties[i]);
 
         }
 
-        textView_title = (TextView) findViewById( R.id.textView_title_details );
-        textView_title.setText( deepest_properties[3] );
+        category = deepest_properties[0];
+        depth = deepest_properties[1]+" KM";
+        description = deepest_properties[2];
+        link = deepest_properties[3];
+        country = deepest_properties[4];
+        latitude = deepest_properties[5];
+        longitude = deepest_properties[6];
+        magnitude = deepest_properties[7];
+        date = deepest_properties[8];
+        title = deepest_properties[9];
+
+        textView_title = findViewById( R.id.textView_title_details );
+        textView = findViewById( R.id.textView );
+        textView2 = findViewById( R.id.textView2 );
+        textView3 = findViewById( R.id.textView3 );
+        textView4 = findViewById( R.id.textView4 );
+
+
+
+        textView_title.setText(country);
+        textView2.setText( "Magnitude " +magnitude + " M");
+
+        getSupportActionBar().setTitle(country + "Earthquake");
 
 
 

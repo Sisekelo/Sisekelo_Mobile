@@ -3,7 +3,6 @@ package  com.example.dell.sisekelo_mobile;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -12,7 +11,6 @@ import android.widget.ProgressBar;
 
 import com.example.dell.sisekelo_mobile.model.DataParser;
 import com.example.dell.sisekelo_mobile.model.DataReader;
-import com.example.dell.sisekelo_mobile.model.Details;
 import com.example.dell.sisekelo_mobile.model.WidgetClass;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -20,7 +18,6 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.LinkedList;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener
 {
@@ -93,16 +90,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent myIntent = new Intent(MainActivity.this, Details.class);
                 myIntent.putExtra("info", quackInfo);
                 MainActivity.this.startActivity(myIntent);
-
-
-
-                /*Intent myIntent = new Intent(MainActivity.this, Roadwork_detail.class);
-                myIntent.putExtra("title", object_selected.getTitle());
-                myIntent.putExtra("pubDate", object_selected.getPubDate());
-                myIntent.putExtra("description", object_selected.getDescription());
-                myIntent.putExtra("link", object_selected.getLink());
-                myIntent.putExtra("coordinates", object_selected.getCoordinates());
-                MainActivity.this.startActivity(myIntent);*/
             }
         });
 

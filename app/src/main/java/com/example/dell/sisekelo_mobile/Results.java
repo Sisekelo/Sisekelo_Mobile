@@ -3,7 +3,6 @@ package com.example.dell.sisekelo_mobile;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.dell.sisekelo_mobile.model.Details;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
