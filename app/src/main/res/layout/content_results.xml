@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/activity_results">
+
+    <TextView
+        android:id="@+id/textView_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Deepest"
+        tools:text="Deepest (Worldwide)" />
+
+    <TextView
+        android:id="@+id/textView_deep"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/textView_title2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Shallowest (WorldWide)" />
+
+    <TextView
+        android:id="@+id/textView_shallow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/textView_title3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Largest Magnitude (WorldWide)" />
+
+    <TextView
+        android:id="@+id/textView_largest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/textView_title5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nearest Northern to Mauritius" />
+
+    <TextView
+        android:id="@+id/textView_north"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/textView_title6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nearest Eastern to Mauritius" />
+
+    <TextView
+        android:id="@+id/textView_east"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/textView_title7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nearest Western to Mauritius" />
+
+    <TextView
+        android:id="@+id/textView_west"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/textView_title4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nearest Southern to Mauritius" />
+
+    <TextView
+        android:id="@+id/textView_south"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textSize="30sp" />
+</LinearLayout>
