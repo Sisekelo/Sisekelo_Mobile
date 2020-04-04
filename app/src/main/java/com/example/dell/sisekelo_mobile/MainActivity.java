@@ -5,13 +5,17 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import com.example.dell.sisekelo_mobile.model.DataParser;
 import com.example.dell.sisekelo_mobile.model.DataReader;
+import com.example.dell.sisekelo_mobile.model.Details;
 import com.example.dell.sisekelo_mobile.model.WidgetClass;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.LinkedList;
 
@@ -27,6 +31,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private String urlSource = "https://quakes.bgs.ac.uk/feeds/WorldSeismology.xml";
     private ListView ListView_LIST;
     private ArrayAdapter arrayAdapter;
+    private ProgressBar spinner;
+
 
     DataReader rssReader = new DataReader();
     DataParser rssParser = new DataParser();
@@ -56,7 +62,51 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+
+        spinner = findViewById(R.id.progressBar1);
+        spinner.setVisibility(View.VISIBLE);
         asyncRSSParser.execute();
+
+        ListView_LIST.setOnItemClickListener( new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                final WidgetClass object_selected = rssParser.earthquakeList.get(position);
+
+                String quackInfo = "";
+
+                quackInfo += object_selected.getCategory() + "\n";
+                quackInfo += object_selected.getDepth() + "\n";
+                quackInfo += object_selected.getDescription() + "\n";
+                quackInfo += object_selected.getLink() + "\n";
+                quackInfo += object_selected.getLocation() + "\n";
+                quackInfo += object_selected.getLongitude() + "\n";
+                quackInfo += object_selected.getLatitude() + "\n";
+                quackInfo += object_selected.getMagnitude() + "\n";
+                quackInfo += object_selected.getPubDate() + "\n";
+                quackInfo += object_selected.getTitle();
+
+
+                Snackbar.make(view, ""+ object_selected.getDescription(), Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+
+                Intent myIntent = new Intent(MainActivity.this, Details.class);
+                myIntent.putExtra("info", quackInfo);
+                MainActivity.this.startActivity(myIntent);
+
+
+
+                /*Intent myIntent = new Intent(MainActivity.this, Roadwork_detail.class);
+                myIntent.putExtra("title", object_selected.getTitle());
+                myIntent.putExtra("pubDate", object_selected.getPubDate());
+                myIntent.putExtra("description", object_selected.getDescription());
+                myIntent.putExtra("link", object_selected.getLink());
+                myIntent.putExtra("coordinates", object_selected.getCoordinates());
+                MainActivity.this.startActivity(myIntent);*/
+            }
+        });
+
+
 
     }
 
@@ -85,10 +135,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // Print the First Element from the earthquakeList returned by doInBackground()
         protected void onPostExecute(LinkedList<WidgetClass> earthquakeList) {
 
-
-
             arrayAdapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, rssParser.titleList);
             ListView_LIST.setAdapter(arrayAdapter);
+            spinner.setVisibility(View.GONE);
             // END
         }
 
