@@ -1,12 +1,12 @@
 package com.example.dell.sisekelo_mobile;
 
+/*SISEKELO DLAMINI S1719039*/
+
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-
-import com.example.dell.sisekelo_mobile.model.DataParser;
-import com.example.dell.sisekelo_mobile.model.WidgetClass;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -16,6 +16,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+
+import com.example.dell.sisekelo_mobile.model.DataParser;
+import com.example.dell.sisekelo_mobile.model.WidgetClass;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -50,10 +53,6 @@ public class Search extends AppCompatActivity {
         month = calendar.get(Calendar.MONTH);
         day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        //start_date.setText(setDate(year, month+1, day));
-
-
-
         Intent intent = getIntent();
         String data_feed = intent.getStringExtra("data_feed");
 
@@ -68,6 +67,57 @@ public class Search extends AppCompatActivity {
 
         final Date[] date1 = {null};
         final Date[] date2 = {null};
+
+        final Calendar c = Calendar.getInstance();
+        final int mYear = c.get(Calendar.YEAR);
+        final int mMonth = c.get(Calendar.MONTH);
+        final int mDay = c.get(Calendar.DAY_OF_MONTH);
+
+
+        start_date.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                DatePickerDialog datePickerDialog;
+                datePickerDialog = new DatePickerDialog(Search.this,
+                        new DatePickerDialog.OnDateSetListener() {
+
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
+
+                                start_date.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+
+                            }
+                        }, mYear, mMonth, mDay);
+                datePickerDialog.show();
+
+
+            }
+        });
+
+        end_date.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                DatePickerDialog datePickerDialog;
+                datePickerDialog = new DatePickerDialog(Search.this,
+                        new DatePickerDialog.OnDateSetListener() {
+
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
+
+                                end_date.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+
+                            }
+                        }, mYear, mMonth, mDay);
+                datePickerDialog.show();
+
+
+            }
+        });
+
 
 
 
@@ -91,25 +141,216 @@ public class Search extends AppCompatActivity {
                 final Date finalDate = date1[0];
                 final Date finalDate1 = date2[0];
 
-                //deepest
-                String deepest_info = getDeepest(quakes, finalDate, finalDate1);
+                if(finalDate.after( finalDate1 )){
 
-                //shallowest
-                String shallowest_info = getShallowest(quakes, finalDate, finalDate1);
+                    AlertDialog alertDialog = new AlertDialog.Builder(Search.this).create();
+                    alertDialog.setTitle("Error");
+                    alertDialog.setMessage("Your Start date is after the end date");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Reload",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                    Intent intent = getIntent();
+                                    finish();
+                                    startActivity(intent);
+                                }
+                            });
+                    alertDialog.show();
 
-                //largest
-                String largest_info = getLargest(quakes, finalDate, finalDate1);
+                }
+                else {
+                    //deepest
+                    String deepest_info = getDeepest( quakes, finalDate, finalDate1 );
 
-                Intent myIntent = new Intent(Search.this, Results.class);
-                myIntent.putExtra("deepest", deepest_info);
-                myIntent.putExtra("shallowest", shallowest_info);
-                myIntent.putExtra("largest", largest_info);
-                Search.this.startActivity(myIntent);
+                    //shallowest
+                    String shallowest_info = getShallowest( quakes, finalDate, finalDate1 );
 
+                    //largest
+                    String largest_info = getLargest( quakes, finalDate, finalDate1 );
 
+                    //northest
+                    String north_info = getNorth( quakes, finalDate, finalDate1 );
+
+                    //southest
+                    String south_info = getSouth( quakes, finalDate, finalDate1 );
+
+                    Intent myIntent = new Intent( Search.this, Results.class );
+                    myIntent.putExtra( "deepest", deepest_info );
+                    myIntent.putExtra( "shallowest", shallowest_info );
+                    myIntent.putExtra( "largest", largest_info );
+                    myIntent.putExtra( "northest", north_info );
+                    myIntent.putExtra( "southest", south_info );
+                    Search.this.startActivity( myIntent );
+
+                }
             }
         });
 
+
+    }
+
+    private String getSouth(LinkedList<WidgetClass> quakes, Date date1, Date date2) {
+
+        double mauritius_lat = -20.3;
+        double distance_holder = 0;
+        String southest_info = "";
+
+        for(int i = 0 ; i < quakes.size() ; i++){
+
+            double current_lat = Double.parseDouble(quakes.get(i).getLatitude());
+
+            String date = quakes.get( i ).getPubDate();
+            SimpleDateFormat formatter5=new SimpleDateFormat("E, dd MMM yyyy HH:mm:ss");
+
+            Date date3= null;
+            try {
+                date3 = formatter5.parse(date);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            boolean datetruth = isDateCorrect( date1, date2, date3 );
+
+            String cardinal = getNorthOrSouth(current_lat,mauritius_lat);
+
+            double distance = Math.abs( current_lat - mauritius_lat );
+
+            if(i == 0){
+                distance_holder = distance;
+            }
+
+
+
+            if(datetruth){
+
+                switch(cardinal) {
+                    case "south":
+                        // code block
+                        if(distance >= distance_holder){
+                            distance_holder = distance;
+
+                            southest_info = "";
+
+                            southest_info += quakes.get( i ).getCategory() + "\n";
+                            southest_info += quakes.get( i ).getDepth() + "\n";
+                            southest_info += quakes.get( i ).getDescription() + "\n";
+                            southest_info += quakes.get( i ).getLink() + "\n";
+                            southest_info += quakes.get( i ).getLocation() + "\n";
+                            southest_info += quakes.get( i ).getLongitude() + "\n";
+                            southest_info += quakes.get( i ).getLatitude() + "\n";
+                            southest_info += quakes.get( i ).getMagnitude() + "\n";
+                            southest_info += quakes.get( i ).getPubDate() + "\n";
+                            southest_info += quakes.get( i ).getTitle();
+
+
+                        }
+                        break;
+                    case "north":
+                        // code block
+                        break;
+                    default:
+                        // code block
+                }
+
+
+
+
+
+            }
+        }
+
+
+        return southest_info;
+    }
+
+    private String getNorth(LinkedList<WidgetClass> quakes, Date date1, Date date2) {
+
+        double mauritius_lat = -20.3;
+        double distance_holder = 0;
+        String northest_info = "";
+
+        for(int i = 0 ; i < quakes.size() ; i++){
+
+            double current_lat = Double.parseDouble(quakes.get(i).getLatitude());
+
+            String date = quakes.get( i ).getPubDate();
+            SimpleDateFormat formatter5=new SimpleDateFormat("E, dd MMM yyyy HH:mm:ss");
+
+            Date date3= null;
+            try {
+                date3 = formatter5.parse(date);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            boolean datetruth = isDateCorrect( date1, date2, date3 );
+
+            String cardinal = getNorthOrSouth(current_lat,mauritius_lat);
+
+            double distance = Math.abs( current_lat - mauritius_lat );
+
+            if(i == 0){
+                distance_holder = distance;
+            }
+
+
+
+            if(datetruth){
+
+                Log.d("test_north","TRUE"+quakes.get( i ).getLatitude());
+
+
+                switch(cardinal) {
+                    case "north":
+                        // code block
+                        if(distance <= distance_holder){
+                            distance_holder = distance;
+
+                            northest_info = "";
+
+                            northest_info += quakes.get( i ).getCategory() + "\n";
+                            northest_info += quakes.get( i ).getDepth() + "\n";
+                            northest_info += quakes.get( i ).getDescription() + "\n";
+                            northest_info += quakes.get( i ).getLink() + "\n";
+                            northest_info += quakes.get( i ).getLocation() + "\n";
+                            northest_info += quakes.get( i ).getLongitude() + "\n";
+                            northest_info += quakes.get( i ).getLatitude() + "\n";
+                            northest_info += quakes.get( i ).getMagnitude() + "\n";
+                            northest_info += quakes.get( i ).getPubDate() + "\n";
+                            northest_info += quakes.get( i ).getTitle();
+
+
+                        }
+                        break;
+                    case "south":
+                        // code block
+                        break;
+                    default:
+                        // code block
+                }
+
+
+
+
+
+            }
+        }
+
+
+        return northest_info;
+
+    }
+
+    private String getNorthOrSouth(double current_lat, double mauritius_lat) {
+
+        double distance = current_lat - mauritius_lat;
+
+        if(distance > 0) {
+            return "north";
+        }
+        else{
+            return "south";
+        }
 
     }
 

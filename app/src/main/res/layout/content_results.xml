@@ -1,102 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:fillViewport="false"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_results">
 
-    <TextView
-        android:id="@+id/textView_title"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Deepest"
-        tools:text="Deepest (Worldwide)" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
 
-    <TextView
-        android:id="@+id/textView_deep"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textSize="30sp" />
+        <TextView
+            android:id="@+id/textView_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/roboto_slab_bold"
+            android:text="Deepest"
+            android:textAlignment="center"
+            tools:text="Deepest (Worldwide)" />
 
-    <TextView
-        android:id="@+id/textView_title2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Shallowest (WorldWide)" />
+        <TextView
+            android:id="@+id/textView_deep"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat"
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="22sp" />
 
-    <TextView
-        android:id="@+id/textView_shallow"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textSize="30sp" />
+        <TextView
+            android:id="@+id/textView_title2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_slab_bold"
+            android:text="Shallowest (WorldWide)"
+            android:textAlignment="center" />
 
-    <TextView
-        android:id="@+id/textView_title3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Largest Magnitude (WorldWide)" />
+        <TextView
+            android:id="@+id/textView_shallow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat"
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="22sp" />
 
-    <TextView
-        android:id="@+id/textView_largest"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textSize="30sp" />
+        <TextView
+            android:id="@+id/textView_title3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_slab_bold"
 
-    <TextView
-        android:id="@+id/textView_title5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Nearest Northern to Mauritius" />
+            android:text="Largest Magnitude (WorldWide)"
+            android:textAlignment="center" />
 
-    <TextView
-        android:id="@+id/textView_north"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textSize="30sp" />
+        <TextView
+            android:id="@+id/textView_largest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat"
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="22sp" />
 
-    <TextView
-        android:id="@+id/textView_title6"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Nearest Eastern to Mauritius" />
+        <TextView
+            android:id="@+id/textView_title5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_slab_bold"
 
-    <TextView
-        android:id="@+id/textView_east"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textSize="30sp" />
+            android:text="Nearest Northern to Mauritius"
+            android:textAlignment="center" />
 
-    <TextView
-        android:id="@+id/textView_title7"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Nearest Western to Mauritius" />
+        <TextView
+            android:id="@+id/textView_north"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat"
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="22sp" />
 
-    <TextView
-        android:id="@+id/textView_west"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textSize="30sp" />
+        <TextView
+            android:id="@+id/textView_title4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_slab_bold"
 
-    <TextView
-        android:id="@+id/textView_title4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Nearest Southern to Mauritius" />
+            android:text="Nearest Southern to Mauritius"
+            android:textAlignment="center" />
 
-    <TextView
-        android:id="@+id/textView_south"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textSize="30sp" />
-</LinearLayout>
+        <TextView
+            android:id="@+id/textView_south"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat"
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="22sp" />
+
+        <TextView
+            android:id="@+id/textView_title6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_slab_bold"
+            android:text="Nearest Eastern to Mauritius"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/textView_east"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat"
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="22sp" />
+
+        <TextView
+            android:id="@+id/textView_title7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:fontFamily="@font/roboto_slab_bold"
+            android:text="Nearest Western to Mauritius"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/textView_west"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat"
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="22sp" />
+
+    </LinearLayout>
+</ScrollView>

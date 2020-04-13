@@ -1,5 +1,7 @@
 package com.example.dell.sisekelo_mobile.model;
 
+/*SISEKELO DLAMINI S1719039*/
+
 public class WidgetClass {
 
     private String title,description,link,pubDate,category,latitude,longitude,location,depth,magnitude;

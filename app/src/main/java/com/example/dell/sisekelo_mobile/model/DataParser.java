@@ -1,5 +1,7 @@
 package com.example.dell.sisekelo_mobile.model;
 
+/*SISEKELO DLAMINI S1719039*/
+
 import android.util.Log;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -12,7 +14,7 @@ import java.util.LinkedList;
 
 
 public class DataParser {
-    // Linked List containing top stories each with its own title, description and publication date
+
     public LinkedList < WidgetClass > earthquakeList = null;
 
     public LinkedList < String > titleList = null;

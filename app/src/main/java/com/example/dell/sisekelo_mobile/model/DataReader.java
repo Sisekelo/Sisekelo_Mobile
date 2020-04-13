@@ -1,5 +1,7 @@
 package com.example.dell.sisekelo_mobile.model;
 
+/*SISEKELO DLAMINI S1719039*/
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
